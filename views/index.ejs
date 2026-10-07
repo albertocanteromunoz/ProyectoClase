@@ -3,12 +3,154 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <!-- Improved Header: Meta tags, favicon, and responsive design -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <!-- Google Fonts: Roboto for better look -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Small interactive navbar styles -->
+    <style>
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #1c2833;
+        color: white;
+        padding: 16px 32px;
+        font-family: 'Roboto', Arial, sans-serif;
+      }
+      .logo {
+        font-size: 1.5em;
+        font-weight: 700;
+        letter-spacing: 2px;
+      }
+      nav a {
+        color: white;
+        text-decoration: none;
+        margin-left: 20px;
+        transition: color 0.2s;
+        font-weight: 500;
+      }
+      nav a:hover {
+        color: #F9D923;
+      }
+      @media (max-width: 600px) {
+        header {
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 16px;
+        }
+        nav {
+          margin-top: 8px;
+        }
+      }
+    </style>
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Bienvenidos todods y todas a <%= title %></p>
+    <div class="hero">
+      <div class="hero-content">
+        <h1 class="hero-title"><%= title %></h1>
+        <p class="hero-subtitle">Bienvenidos todos y todas a <%= title %> 🚀</p>
+        <a href="#about" class="hero-btn">Descubre más</a>
+      </div>
+    </div>
+    <style>
+      .hero {
+        min-height: 60vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #24527a 40%, #F9D923 100%);
+        color: #fff;
+        margin-bottom: 40px;
+        box-shadow: 0 4px 16px rgba(44, 62, 80, 0.06);
+        border-radius: 0 0 32px 32px;
+        position: relative;
+        overflow: hidden;
+        font-family: 'Roboto', Arial, sans-serif;
+      }
+      .hero-content {
+        text-align: center;
+        background: rgba(22, 36, 50, 0.55);
+        padding: 40px 24px 32px 24px;
+        border-radius: 20px;
+        box-shadow: 0 2px 18px rgba(0,0,0,0.07);
+        animation: fadeInUp 1.2s cubic-bezier(.68,-0.25,.27,1.25);
+      }
+      .hero-title {
+        font-size: 2.5em;
+        font-weight: 700;
+        margin-bottom: 16px;
+        letter-spacing: 1.5px;
+        color: #F9D923;
+        text-shadow: 0 3px 8px rgba(20, 35, 55, 0.18);
+      }
+      .hero-subtitle {
+        font-size: 1.2em;
+        margin-bottom: 28px;
+        color: #fffde4;
+        text-shadow: 0 1px 5px rgba(30,20,80,0.09);
+      }
+      .hero-btn {
+        display: inline-block;
+        padding: 12px 34px;
+        background: #F9D923;
+        color: #1c2833;
+        font-weight: 700;
+        border-radius: 50px;
+        text-decoration: none;
+        font-size: 1.07em;
+        letter-spacing: 1px;
+        box-shadow: 0 2px 14px rgba(249,217,35,0.16);
+        transition: background 0.2s, color 0.2s, transform 0.2s;
+        cursor: pointer;
+      }
+      .hero-btn:hover {
+        background: #1c2833;
+        color: #F9D923;
+        transform: scale(1.06);
+      }
+      @keyframes fadeInUp {
+        0% {
+          opacity: 0;
+          transform: translateY(40px);
+        }
+        100% {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      @media (max-width:700px) {
+        .hero-title { font-size: 2em; }
+        .hero-content { padding: 28px 5vw; }
+      }
+    </style>
     <footer style="margin-top: auto; padding: 20px 0; text-align: center; color: #888;">
       &copy; <%= new Date().getFullYear() %> 2DAW. Todos los derechos reservados.
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+      <div>
+        <span style="font-weight: bold; color: #F9D923;"><i class="fas fa-graduation-cap"></i> 2DAW</span> 
+        &copy; <%= new Date().getFullYear() %> · Todos los derechos reservados.
+      </div>
+      <div style="margin-top: 6px;">
+        <a href="https://www.facebook.com" target="_blank" style="margin: 0 6px; color: #F9D923; text-decoration: none; font-size: 1.15em; transition: color 0.2s;">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://www.twitter.com" target="_blank" style="margin: 0 6px; color: #F9D923; text-decoration: none; font-size: 1.15em; transition: color 0.2s;">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="mailto:info@2daw.com" style="margin: 0 6px; color: #F9D923; text-decoration: none; font-size: 1.15em; transition: color 0.2s;">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </div>
+      <div style="font-size: 0.95em; color: #bbb;">
+        Hecho con <span style="color:#F9D923;">&#10084;</span> por el equipo de 2DAW
+      </div>
+    </div>
+    <!-- Iconos CDN (Font Awesome) si no están cargados globalmente -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
     </footer>
   </body>
 </html>
