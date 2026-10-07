@@ -16,6 +16,11 @@ Consiste en un sitio web para un centro formativo de FP.
 ## Arquitectura
 - Todo en una única página index, dividido por secciones. 
 
+## Contenido de la web
+- El contenido debe ser realista. 
+- El contenido debe ser en ingles. 
+- Las imagenes por defecto son de picsum.photos.
+
 ## Convenciones del lenguaje 
 - Usa ingles para las variables y funciones.
 
