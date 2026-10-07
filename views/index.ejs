@@ -1,156 +1,323 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <!-- Improved Header: Meta tags, favicon, and responsive design -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Favicon -->
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <!-- Google Fonts: Roboto for better look -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Small interactive navbar styles -->
-    <style>
-      header {
+  <!-- Header Bonito e Interactivo -->
+  <header class="header">
+    <div class="header-container">
+      <a href="/" class="logo">
+        <span>Educación+</span>
+      </a>
+      <nav class="nav" id="navbar">
+        <ul>
+          <li><a href="#about" class="nav-link">Descripción</a></li>
+          <li><a href="#courses" class="nav-link">Cursos</a></li>
+          <li><a href="#contact" class="nav-link">Contacto</a></li>
+        </ul>
+        <div class="nav-toggle" id="navToggle" aria-label="Abrir menú" tabindex="0">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <style>
+    .header {
+      width: 100%;
+      background: rgba(36, 82, 122, 0.97);
+      box-shadow: 0 2px 14px rgba(20,35,55,.12);
+      padding: 0;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      font-family: 'Roboto', Arial, sans-serif;
+    }
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      height: 68px;
+    }
+    .logo {
+      color: #F9D923;
+      font-weight: bold;
+      font-size: 1.7em;
+      letter-spacing: 1px;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .logo:hover {
+      color: #ffe066;
+      text-shadow: 0 2px 8px #fff4;
+    }
+    .nav ul {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      align-items: center;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-link {
+      color: #fffde4;
+      text-decoration: none;
+      font-size: 1.1em;
+      font-weight: 500;
+      transition: color 0.2s;
+      position: relative;
+      padding: 6px 0;
+    }
+    .nav-link::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      left: 0;
+      bottom: 0;
+      background: #F9D923;
+      transform: scaleX(0);
+      transition: transform 0.28s cubic-bezier(.68,-0.6,.32,1.6);
+    }
+    .nav-link:hover,
+    .nav-link:focus-visible {
+      color: #F9D923;
+    }
+    .nav-link:hover::before,
+    .nav-link:focus-visible::before {
+      transform: scaleX(1);
+    }
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      margin-left: 24px;
+      height: 28px;
+      justify-content: center;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 28px;
+      height: 3.5px;
+      margin: 3px 0;
+      background: #F9D923;
+      border-radius: 2px;
+      transition: 0.4s;
+    }
+    /* Responsive Styles */
+    @media (max-width: 820px) {
+      .header-container {
+        padding: 0 12px;
+      }
+      .nav ul {
+        gap: 14px;
+      }
+    }
+    @media (max-width: 700px) {
+      .nav ul {
+        position: absolute;
+        top: 68px;
+        right: 0;
+        background: #162432f8;
+        flex-direction: column;
+        width: 190px;
+        gap: 0;
+        border-radius: 0 0 0 16px;
+        overflow: hidden;
+        max-height: 0;
+        transition: max-height 0.38s cubic-bezier(.48,-0.1,.51,1.45), box-shadow 0.28s;
+        box-shadow: none;
+        z-index: 80;
+      }
+      .nav ul.active {
+        max-height: 300px;
+        box-shadow: 0 12px 30px #2c3e5042;
+      }
+      .nav ul li {
+        padding: 0;
+      }
+      .nav-link {
+        padding: 14px 32px;
+        display: block;
+      }
+      .nav-toggle {
         display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background: #1c2833;
-        color: white;
-        padding: 16px 32px;
-        font-family: 'Roboto', Arial, sans-serif;
       }
-      .logo {
-        font-size: 1.5em;
-        font-weight: 700;
-        letter-spacing: 2px;
-      }
-      nav a {
-        color: white;
-        text-decoration: none;
-        margin-left: 20px;
-        transition: color 0.2s;
-        font-weight: 500;
-      }
-      nav a:hover {
-        color: #F9D923;
-      }
-      @media (max-width: 600px) {
-        header {
-          flex-direction: column;
-          align-items: flex-start;
-          padding: 16px;
+    }
+  </style>
+  <script>
+    // Interactividad header/nav para menú hamburguesa en móviles
+    document.addEventListener('DOMContentLoaded', function() {
+      const navToggle = document.getElementById('navToggle');
+      const navLinks = document.querySelector('.nav ul');
+      navToggle.addEventListener('click', function() {
+        navLinks.classList.toggle('active');
+      });
+      navToggle.addEventListener('keypress', function(e){
+        if (e.key === 'Enter' || e.key === ' ') {
+          navLinks.classList.toggle('active');
         }
-        nav {
-          margin-top: 8px;
-        }
-      }
-    </style>
+      });
+      // Opcional: autocierra menú al seleccionar
+      navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          if(window.innerWidth < 701) navLinks.classList.remove('active');
+        });
+      });
+    });
+  </script>
   </head>
   <body>
-    <div class="hero">
-      <div class="hero-content">
-        <h1 class="hero-title"><%= title %></h1>
-        <p class="hero-subtitle">Bienvenidos todos y todas a <%= title %> 🚀</p>
-        <a href="#about" class="hero-btn">Descubre más</a>
+    <!-- Sección Descripción -->
+    <section id="about" style="padding: 72px 0 48px; background: #f5f6fa; min-height: 300px;">
+      <div style="max-width: 950px; margin: 0 auto; padding: 0 30px;">
+        <h2 style="color: #24527a; font-size: 2.2em; font-weight: 700; margin-bottom: 18px;">
+          ¿Qué es Educación+?
+        </h2>
+        <p style="font-size: 1.1em; color: #333; margin-bottom: 16px;">
+          <strong>Educación+</strong> es una plataforma dedicada a ofrecer recursos formativos de calidad adaptados a las necesidades del alumnado, facilitando herramientas modernas y un enfoque práctico para el desarrollo de habilidades profesionales en entornos educativos actuales.
+        </p>
+        <ul style="color: #24527a; font-size: 1.04em; line-height: 1.7;">
+          <li>Docentes experimentados y comprometidos con la innovación educativa.</li>
+          <li>Cursos actualizados según las demandas del mercado laboral.</li>
+          <li>Acceso 24/7 al material y soporte personalizado.</li>
+          <li>Entorno digital seguro y fácil de usar.</li>
+        </ul>
       </div>
-    </div>
-    <style>
-      .hero {
-        min-height: 60vh;
+    </section>
+
+    <!-- Sección Cursos -->
+    <section id="courses" style="padding: 72px 0 48px; background: #eef2f7; min-height: 320px;">
+      <div style="max-width: 1150px; margin: 0 auto; padding: 0 30px;">
+        <h2 style="color: #24527a; font-size: 2.2em; font-weight: 700; margin-bottom: 18px;">
+          Nuestros Cursos
+        </h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 28px;">
+          <div style="background: #fff; border-radius: 12px; box-shadow: 0 2px 12px #5a749015; flex: 1 1 270px; min-width: 260px; max-width: 340px; padding: 22px;">
+            <h3 style="color: #416788; font-size: 1.18em; font-weight: 600; margin-bottom: 8px;">
+              Desarrollo Web Full Stack
+            </h3>
+            <p style="font-size: 0.99em; color: #444;">
+              Aprende a crear y desplegar aplicaciones web utilizando tecnologías como HTML5, CSS3, JavaScript, Node.js y Express. Proyectos reales y enfoque en la empleabilidad.
+            </p>
+          </div>
+          <div style="background: #fff; border-radius: 12px; box-shadow: 0 2px 12px #5a749015; flex: 1 1 270px; min-width: 260px; max-width: 340px; padding: 22px;">
+            <h3 style="color: #416788; font-size: 1.18em; font-weight: 600; margin-bottom: 8px;">
+              Bases de Datos Avanzadas
+            </h3>
+            <p style="font-size: 0.99em; color: #444;">
+              Domina la gestión y diseño de bases de datos con SQL, NoSQL y herramientas modernas imprescindibles para el desarrollo de proyectos robustos.
+            </p>
+          </div>
+          <div style="background: #fff; border-radius: 12px; box-shadow: 0 2px 12px #5a749015; flex: 1 1 270px; min-width: 260px; max-width: 340px; padding: 22px;">
+            <h3 style="color: #416788; font-size: 1.18em; font-weight: 600; margin-bottom: 8px;">
+              Diseño de Interfaces de Usuario
+            </h3>
+            <p style="font-size: 0.99em; color: #444;">
+              Explora los principios de UX/UI, diseño adaptativo y creación de experiencias digitales atractivas desde cero.
+            </p>
+          </div>
+        </div>
+        <p style="margin-top: 30px; color: #24527a; font-size: 1em;">
+          <strong>¿Te interesa otro ámbito?</strong> Consulta nuestra oferta completa de módulos o contáctanos para más información.
+        </p>
+      </div>
+    </section>
+
+    <!-- Sección Contacto -->
+    <section id="contact" style="padding: 72px 0 70px; background: #fff; min-height: 260px;">
+      <div style="max-width: 800px; margin: 0 auto; padding: 0 30px;">
+        <h2 style="color: #24527a; font-size: 2.2em; font-weight: 700; margin-bottom: 18px;">
+          Contacto
+        </h2>
+        <p style="color: #253859; font-size: 1.08em; margin-bottom: 20px;">
+          ¿Tienes dudas, sugerencias o quieres solicitar más información sobre nuestros cursos? ¡Rellena el formulario o utiliza los canales directos!
+        </p>
+        <form action="mailto:info@2daw.com" method="post" enctype="text/plain" style="background: #f5f6fa; border-radius: 12px; padding: 22px 24px; max-width: 480px;">
+          <div style="margin-bottom: 13px;">
+            <label for="nombre" style="font-weight: 500; color: #416788;">Nombre:</label><br/>
+            <input type="text" name="nombre" id="nombre" required style="width: 100%; padding: 9px; border: 1px solid #c2cadd; border-radius: 6px;"/>
+          </div>
+          <div style="margin-bottom: 13px;">
+            <label for="email" style="font-weight: 500; color: #416788;">Correo electrónico:</label><br/>
+            <input type="email" name="email" id="email" required style="width: 100%; padding: 9px; border: 1px solid #c2cadd; border-radius: 6px;"/>
+          </div>
+          <div style="margin-bottom: 15px;">
+            <label for="mensaje" style="font-weight: 500; color: #416788;">Mensaje:</label><br/>
+            <textarea name="mensaje" id="mensaje" rows="4" required style="width: 100%; padding: 9px; border: 1px solid #c2cadd; border-radius: 6px; resize: vertical;"></textarea>
+          </div>
+          <button type="submit" style="background: #F9D923; color: #24527a; font-weight: bold; padding: 10px 26px; border-radius: 7px; border: none; cursor: pointer; transition: background 0.2s;">
+            Enviar mensaje
+          </button>
+        </form>
+        <div style="margin-top: 22px; color: #888; font-size: 0.98em;">
+          También puedes escribirnos por correo electrónico a <strong>info@2daw.com</strong> o encontrarnos en nuestras redes sociales.
+        </div>
+      </div>
+    </section>
+    <footer 
+    <div style="
+      width: 100%;
+      background: #24527a;
+      color: #fff;
+      padding: 32px 0 12px 0;
+      font-family: 'Roboto', Arial, sans-serif;
+      border-top-left-radius: 24px;
+      border-top-right-radius: 24px;
+      box-shadow: 0 -2px 12px #16314b18;
+    ">
+      <div style="
+        max-width: 1100px;
+        margin: 0 auto;
         display: flex;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(135deg, #24527a 40%, #F9D923 100%);
-        color: #fff;
-        margin-bottom: 40px;
-        box-shadow: 0 4px 16px rgba(44, 62, 80, 0.06);
-        border-radius: 0 0 32px 32px;
-        position: relative;
-        overflow: hidden;
-        font-family: 'Roboto', Arial, sans-serif;
-      }
-      .hero-content {
-        text-align: center;
-        background: rgba(22, 36, 50, 0.55);
-        padding: 40px 24px 32px 24px;
-        border-radius: 20px;
-        box-shadow: 0 2px 18px rgba(0,0,0,0.07);
-        animation: fadeInUp 1.2s cubic-bezier(.68,-0.25,.27,1.25);
-      }
-      .hero-title {
-        font-size: 2.5em;
-        font-weight: 700;
-        margin-bottom: 16px;
-        letter-spacing: 1.5px;
-        color: #F9D923;
-        text-shadow: 0 3px 8px rgba(20, 35, 55, 0.18);
-      }
-      .hero-subtitle {
-        font-size: 1.2em;
-        margin-bottom: 28px;
-        color: #fffde4;
-        text-shadow: 0 1px 5px rgba(30,20,80,0.09);
-      }
-      .hero-btn {
-        display: inline-block;
-        padding: 12px 34px;
-        background: #F9D923;
-        color: #1c2833;
-        font-weight: 700;
-        border-radius: 50px;
-        text-decoration: none;
-        font-size: 1.07em;
-        letter-spacing: 1px;
-        box-shadow: 0 2px 14px rgba(249,217,35,0.16);
-        transition: background 0.2s, color 0.2s, transform 0.2s;
-        cursor: pointer;
-      }
-      .hero-btn:hover {
-        background: #1c2833;
-        color: #F9D923;
-        transform: scale(1.06);
-      }
-      @keyframes fadeInUp {
-        0% {
-          opacity: 0;
-          transform: translateY(40px);
-        }
-        100% {
-          opacity: 1;
-          transform: none;
-        }
-      }
-      @media (max-width:700px) {
-        .hero-title { font-size: 2em; }
-        .hero-content { padding: 28px 5vw; }
-      }
-    </style>
-    <footer style="margin-top: auto; padding: 20px 0; text-align: center; color: #888;">
-      &copy; <%= new Date().getFullYear() %> 2DAW. Todos los derechos reservados.
-    <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
-      <div>
-        <span style="font-weight: bold; color: #F9D923;"><i class="fas fa-graduation-cap"></i> 2DAW</span> 
-        &copy; <%= new Date().getFullYear() %> · Todos los derechos reservados.
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 32px;
+        padding: 0 32px;
+      ">
+        <div style="flex:1 1 260px; min-width:200px; margin-bottom:18px;">
+          <div style="font-size: 1.43em; font-weight: 700; color: #F9D923; letter-spacing: 1px; margin-bottom: 7px;">Educación+</div>
+          <div style="color: #e7e9fa; font-size: 1em; line-height:1.5;">
+            Inspirando a aprender, crear y crecer en el mundo digital.<br>
+            <span style="font-size: 0.98em; color: #ffe066c2;">¡Gracias por visitarnos!</span>
+          </div>
+        </div>
+        <div style="flex:1 1 180px; min-width:170px; margin-bottom:18px;">
+          <div style="font-weight:600; margin-bottom: 6px;">Enlaces rápidos</div>
+          <ul style="list-style:none; padding:0; margin:0; color:#fff;">
+            <li><a href="#about" style="color:#fff; text-decoration:none; transition:color 0.2s;">Descripción</a></li>
+            <li><a href="#courses" style="color:#fff; text-decoration:none; transition:color 0.2s;">Cursos</a></li>
+            <li><a href="#contact" style="color:#fff; text-decoration:none; transition:color 0.2s;">Contacto</a></li>
+          </ul>
+        </div>
+        <div style="flex:1 1 210px; min-width:170px; margin-bottom:18px;">
+          <div style="font-weight:600; margin-bottom:6px;">Redes sociales</div>
+          <div style="display:flex; gap:14px;">
+            <a href="https://twitter.com/" target="_blank" rel="noopener" aria-label="Twitter"
+               style="color:#F9D923; font-size:1.3em; text-decoration:none; transition:color 0.2s;">
+              <i class="fa fa-twitter"></i> Twitter
+            </a>
+            <a href="https://facebook.com/" target="_blank" rel="noopener" aria-label="Facebook"
+               style="color:#F9D923; font-size:1.3em; text-decoration:none; transition:color 0.2s;">
+              <i class="fa fa-facebook"></i> Facebook
+            </a>
+          </div>
+        </div>
+        <div style="flex:1 1 210px; min-width:170px;">
+          <div style="font-weight:600; margin-bottom:6px;">Contacto</div>
+          <div style="line-height:1.4; font-size:1em;">
+            <span style="display:block; color:#fff;"><i class="fa fa-envelope"></i> info@2daw.com</span>
+            <span style="display:block; color:#fff;"><i class="fa fa-map-marker"></i> Calle Ejemplo, 15 - Ciudad</span>
+          </div>
+        </div>
       </div>
-      <div style="margin-top: 6px;">
-        <a href="https://www.facebook.com" target="_blank" style="margin: 0 6px; color: #F9D923; text-decoration: none; font-size: 1.15em; transition: color 0.2s;">
-          <i class="fab fa-facebook-f"></i>
-        </a>
-        <a href="https://www.twitter.com" target="_blank" style="margin: 0 6px; color: #F9D923; text-decoration: none; font-size: 1.15em; transition: color 0.2s;">
-          <i class="fab fa-twitter"></i>
-        </a>
-        <a href="mailto:info@2daw.com" style="margin: 0 6px; color: #F9D923; text-decoration: none; font-size: 1.15em; transition: color 0.2s;">
-          <i class="fas fa-envelope"></i>
-        </a>
-      </div>
-      <div style="font-size: 0.95em; color: #bbb;">
-        Hecho con <span style="color:#F9D923;">&#10084;</span> por el equipo de 2DAW
+      <div style="text-align:center; color:#e7e9fa; opacity:0.65; font-size:0.98em; margin-top:34px;">
+        © <%= new Date().getFullYear() %> Educación+ — Creado por el equipo de <span style="color: #F9D923;">2DAW</span>.
       </div>
     </div>
-    <!-- Iconos CDN (Font Awesome) si no están cargados globalmente -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
     </footer>
   </body>
 </html>
