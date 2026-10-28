@@ -432,4 +432,44 @@ a {
   .nav-toggle {
     display: none;
   }
+}.cookie-trigger {
+  color: #94a3b8;
+  cursor: pointer;
+  text-decoration: underline;
+  display: inline-block;
+  margin-top: 8px;
+}
+
+.cookie-trigger:hover {
+  color: #ffffff;
+}
+
+.cookie-dropdown {
+  background-color: #1e293b;
+  color: #f1f5f9;
+  border: 1px solid #334155;
+  border-radius: 6px;
+  padding: 10px;
+  margin-top: 8px;
+  max-width: 250px;
+}
+
+.cookie-dropdown p {
+  font-size: 0.85rem;
+  margin: 0 0 10px 0;
+  line-height: 1.4;
+}
+
+.cookie-dropdown button {
+  background-color: #2563eb;
+  color: #ffffff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.cookie-dropdown button:hover {
+  background-color: #1d4ed8;
 }

@@ -1,3 +1,6 @@
+console.clear();
+console.log("App started");  
+
 document.addEventListener('DOMContentLoaded', function() {
   const navToggle = document.getElementById('navToggle');
   const offcanvas = document.getElementById('offcanvas');
@@ -26,4 +29,15 @@ document.addEventListener('DOMContentLoaded', function() {
       overlay.classList.remove('active');
     });
   });
+  const btnCookies = document.getElementById('cookieBtn');
+  const panelCookies = document.getElementById('cookieDropdown');
+  const btnAceptar = document.getElementById('cookieAcceptBtn');
+
+  btnCookies.onclick = () => {
+    panelCookies.style.display = panelCookies.style.display === 'none' ? 'block' : 'none';
+  };
+
+  btnAceptar.onclick = () => {
+    panelCookies.style.display = 'none';
+  };
 });
